@@ -28,7 +28,7 @@ class BaseChunker(JSONSerializable):
         documents = []
         chunk_ids = []
         id_map = {}
-        min_chunk_size = config.min_chunk_size if config is not None else 1
+        min_chunk_size = config.min_chunk_size if config is not None else 100
         logger.info(f"Skipping chunks smaller than {min_chunk_size} characters")
         data_result = loader.load_data(src)
         data_records = data_result["data"]

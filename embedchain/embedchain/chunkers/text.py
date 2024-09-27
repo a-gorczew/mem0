@@ -13,7 +13,7 @@ class TextChunker(BaseChunker):
 
     def __init__(self, config: Optional[ChunkerConfig] = None):
         if config is None:
-            config = ChunkerConfig(chunk_size=300, chunk_overlap=0, length_function=len)
+            config = ChunkerConfig(chunk_size=1200, chunk_overlap=100, length_function=len)
         text_splitter = RecursiveCharacterTextSplitter(
             chunk_size=config.chunk_size,
             chunk_overlap=config.chunk_overlap,

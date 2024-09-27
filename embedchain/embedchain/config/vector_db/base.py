@@ -26,7 +26,7 @@ class BaseVectorDbConfig(BaseConfig):
         :param kwargs: Additional keyword arguments
         :type kwargs: dict
         """
-        self.collection_name = collection_name or "embedchain_store"
+        self.collection_name = collection_name or "embedchain_store1"
         self.dir = dir
         self.host = host
         self.port = port

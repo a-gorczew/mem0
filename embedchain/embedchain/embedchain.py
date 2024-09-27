@@ -13,6 +13,7 @@ from embedchain.cache import (
     gptcache_update_cache_callback,
 )
 from embedchain.chunkers.base_chunker import BaseChunker
+from embedchain.chunkers.unstructured_file import UnstructuredFileChunker
 from embedchain.config import AddConfig, BaseLlmConfig, ChunkerConfig
 from embedchain.config.base_app_config import BaseAppConfig
 from embedchain.core.db.models import ChatHistory, DataSource
@@ -92,7 +93,7 @@ class EmbedChain(JSONSerializable):
         # Attributes that aren't subclass related.
         self.user_asks = []
 
-        self.chunker: Optional[ChunkerConfig] = None
+        self.chunker: Optional[ChunkerConfig] = ChunkerConfig(chunk_size=1200, chunk_overlap=100, length_function=len)
 
     @property
     def collect_metrics(self):
@@ -122,7 +123,7 @@ class EmbedChain(JSONSerializable):
         config: Optional[AddConfig] = None,
         dry_run=False,
         loader: Optional[BaseLoader] = None,
-        chunker: Optional[BaseChunker] = None,
+        chunker: Optional[UnstructuredFileChunker] = None,
         **kwargs: Optional[dict[str, Any]],
     ):
         """
@@ -221,18 +222,18 @@ class EmbedChain(JSONSerializable):
             return data_chunks_info
 
         # Send anonymous telemetry
-        if self.config.collect_metrics:
-            # it's quicker to check the variable twice than to count words when they won't be submitted.
-            word_count = data_formatter.chunker.get_word_count(documents)
+        # if self.config.collect_metrics:
+        #     # it's quicker to check the variable twice than to count words when they won't be submitted.
+        #     word_count = data_formatter.chunker.get_word_count(documents)
 
             # Send anonymous telemetry
-            event_properties = {
-                **self._telemetry_props,
-                "data_type": data_type.value,
-                "word_count": word_count,
-                "chunks_count": new_chunks,
-            }
-            self.telemetry.capture(event_name="add", properties=event_properties)
+            # event_properties = {
+            #     **self._telemetry_props,
+            #     "data_type": data_type.value,
+            #     "word_count": word_count,
+            #     "chunks_count": new_chunks,
+            # }
+            # self.telemetry.capture(event_name="add", properties=event_properties)
 
         return source_hash
 
@@ -545,8 +546,8 @@ class EmbedChain(JSONSerializable):
                 )
 
         # Send anonymous telemetry
-        if self.config.collect_metrics:
-            self.telemetry.capture(event_name="query", properties=self._telemetry_props)
+        # if self.config.collect_metrics:
+        #     self.telemetry.capture(event_name="query", properties=self._telemetry_props)
 
         if citations:
             if self.llm.config.token_usage:

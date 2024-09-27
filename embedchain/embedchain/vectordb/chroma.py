@@ -103,7 +103,14 @@ class ChromaDB(BaseVectorDB):
         """
         if not hasattr(self, "embedder") or not self.embedder:
             raise ValueError("Cannot create a Chroma database collection without an embedder.")
-        self.collection = self.client.get_or_create_collection(
+        try:
+            self.client.delete_collection("embedchain_store")
+        except Exception:
+            pass
+
+        #TODO
+        # self.collection = self.client.get_or_create_collection(
+        self.collection = self.client.get_collection(
             name=name,
             embedding_function=self.embedder.embedding_fn,
         )

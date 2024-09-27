@@ -418,6 +418,7 @@ def validate_config(config_data):
                     "vllm",
                     "groq",
                     "nvidia",
+                    "igpt"
                 ),
                 Optional("config"): {
                     Optional("model"): str,
@@ -467,6 +468,7 @@ def validate_config(config_data):
                     "ollama",
                     "cohere",
                     "aws_bedrock",
+                    "igpt",
                 ),
                 Optional("config"): {
                     Optional("model"): Optional(str),
