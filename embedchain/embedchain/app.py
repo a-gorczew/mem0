@@ -136,9 +136,9 @@ class App(EmbedChain):
             self.mem0_memory = Memory()
 
         # Send anonymous telemetry
-        self._telemetry_props = {"class": self.__class__.__name__}
-        self.telemetry = AnonymousTelemetry(enabled=self.config.collect_metrics)
-        self.telemetry.capture(event_name="init", properties=self._telemetry_props)
+        # self._telemetry_props = {"class": self.__class__.__name__}
+        # self.telemetry = AnonymousTelemetry(enabled=self.config.collect_metrics)
+        # self.telemetry.capture(event_name="init", properties=self._telemetry_props)
 
         self.user_asks = []
         if self.auto_deploy:

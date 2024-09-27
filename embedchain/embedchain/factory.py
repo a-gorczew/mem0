@@ -27,6 +27,7 @@ class LlmFactory:
         "groq": "embedchain.llm.groq.GroqLlm",
         "nvidia": "embedchain.llm.nvidia.NvidiaLlm",
         "vllm": "embedchain.llm.vllm.VLLM",
+        "igpt": "embedchain.llm.igpt.IGPTLlm",
     }
     provider_to_config_class = {
         "embedchain": "embedchain.config.llm.base.BaseLlmConfig",
@@ -62,6 +63,7 @@ class EmbedderFactory:
         "cohere": "embedchain.embedder.cohere.CohereEmbedder",
         "ollama": "embedchain.embedder.ollama.OllamaEmbedder",
         "aws_bedrock": "embedchain.embedder.aws_bedrock.AWSBedrockEmbedder",
+        "igpt": "embedchain.embedder.igpt.IGPTEmbedder",
     }
     provider_to_config_class = {
         "azure_openai": "embedchain.config.embedder.base.BaseEmbedderConfig",

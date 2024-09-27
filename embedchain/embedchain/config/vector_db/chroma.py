@@ -15,6 +15,7 @@ class ChromaDbConfig(BaseVectorDbConfig):
         batch_size: Optional[int] = 100,
         allow_reset=False,
         chroma_settings: Optional[dict] = None,
+        vector_dimension: int = 1536,
     ):
         """
         Initializes a configuration class instance for ChromaDB.
@@ -38,4 +39,5 @@ class ChromaDbConfig(BaseVectorDbConfig):
         self.chroma_settings = chroma_settings
         self.allow_reset = allow_reset
         self.batch_size = batch_size
+        self.vector_dimension = vector_dimension
         super().__init__(collection_name=collection_name, dir=dir, host=host, port=port)
